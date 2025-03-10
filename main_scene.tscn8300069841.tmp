@@ -9,67 +9,67 @@
 [sub_resource type="GDScript" id="GDScript_gyfs4"]
 script/source = "extends Node2D
 
-#@onready var jar_scene = preload(\"res://bank_scene.tscn\")  # Загрузка сцены банка
-#@onready var textures = [preload(\"res://Assets/Sprite_Red_bank.png\"), 
-						 #preload(\"res://Assets/Sprite_Green_banl.png\"), 
-						 #preload(\"res://Assets/Sprite_Blue_bank.png\")]  # Загрузка текстур
-#@onready var game_field = $Area2D/CollisionShape2D
-#
-#var jar_positions = []  # Список для хранения позиций уже созданных банок
-#var min_distance = 50  # Минимальное расстояние между банками
-## Границы игрового поля, центрированного в координатах (0, 0)
-#var game_area = Rect2(Vector2(-300, -200), Vector2(600, 400))  # От центра (0,0), размеры 600x400
-#
-#
-#func _ready():
-	#for i in range(10):  # Создаём 10 банок
-		#var jar_instance = jar_scene.instantiate()  # Инстанцируем банку
-#
-		## Рандомно выбираем текстуру
-		#var random_texture = textures[randi() % textures.size()]
-		#jar_instance.get_node(\"Sprite2D\").texture = random_texture  # Устанавливаем текстуру
-#
-		## Генерируем случайную позицию без наложений
-		#var new_position = generate_unique_position()
-		#jar_instance.position = new_position
-		#jar_positions.append(new_position)  # Сохраняем позицию
-#
-		#add_child(jar_instance)  # Добавляем банку в сцену
-		#
-#func get_game_area() -> Rect2:
-	#var collision_shape = game_field.get_node(\"CollisionShape2D\")
-	#var shape = collision_shape.shape as RectangleShape2D  # Предположим, это прямоугольник
-	#var size = shape.extents * 2  # Размеры прямоугольника
-	#var top_left = game_field.position - size / 2  # Центр в позиции
-	#return Rect2(top_left, size)
-#
-#func generate_unique_position() -> Vector2:
-	#var max_attempts = 100
-	#for attempt in range(max_attempts):
-		## Генерируем случайную позицию внутри игрового поля
-		#var random_position = Vector2(
-			#randf_range(game_area.position.x, game_area.position.x + game_area.size.x),
-			#randf_range(game_area.position.y, game_area.position.y + game_area.size.y)
-		#)
-		## Проверяем, что позиция валидна
-		#if is_position_valid(random_position):
-			#return random_position
-	#print(\"Не удалось найти уникальную позицию!\")
-	#return Vector2(0, 0)  # Центр игрового поля по умолчанию
- #
-#
-#
-#func is_position_valid(new_position: Vector2) -> bool:
-	## Проверяем наложение и границы
-	#if not game_area.has_point(new_position):
-		#return false  # Позиция вне игрового поля
-	#for existing_position in jar_positions:
-		#if new_position.distance_to(existing_position) < min_distance:
-			#return false  # Слишком близко к другим банкам
-	#return true  # Позиция валидна
-	#
-#func _draw():
-	#draw_rect(game_area, Color(1, 0, 0, 0.5), false)  # Рисуем красный прямоугольник
+@onready var jar_scene = preload(\"res://bank_scene.tscn\")  # Загрузка сцены банка
+@onready var textures = [preload(\"res://Assets/Sprite_Red_bank.png\"), 
+						 preload(\"res://Assets/Sprite_Green_banl.png\"), 
+						 preload(\"res://Assets/Sprite_Blue_bank.png\")]  # Загрузка текстур
+@onready var game_field = $Area2D/CollisionShape2D
+
+var jar_positions = []  # Список для хранения позиций уже созданных банок
+var min_distance = 50  # Минимальное расстояние между банками
+# Границы игрового поля, центрированного в координатах (0, 0)
+var game_area = Rect2(Vector2(-300, -200), Vector2(600, 400))  # От центра (0,0), размеры 600x400
+
+
+func _ready():
+	for i in range(10):  # Создаём 10 банок
+		var jar_instance = jar_scene.instantiate()  # Инстанцируем банку
+
+		# Рандомно выбираем текстуру
+		var random_texture = textures[randi() % textures.size()]
+		jar_instance.get_node(\"Sprite2D\").texture = random_texture  # Устанавливаем текстуру
+
+		# Генерируем случайную позицию без наложений
+		var new_position = generate_unique_position()
+		jar_instance.position = new_position
+		jar_positions.append(new_position)  # Сохраняем позицию
+
+		add_child(jar_instance)  # Добавляем банку в сцену
+		
+func get_game_area() -> Rect2:
+	var collision_shape = game_field.get_node(\"CollisionShape2D\")
+	var shape = collision_shape.shape as RectangleShape2D  # Предположим, это прямоугольник
+	var size = shape.extents * 2  # Размеры прямоугольника
+	var top_left = game_field.position - size / 2  # Центр в позиции
+	return Rect2(top_left, size)
+
+func generate_unique_position() -> Vector2:
+	var max_attempts = 100
+	for attempt in range(max_attempts):
+		# Генерируем случайную позицию внутри игрового поля
+		var random_position = Vector2(
+			randf_range(game_area.position.x, game_area.position.x + game_area.size.x),
+			randf_range(game_area.position.y, game_area.position.y + game_area.size.y)
+		)
+		# Проверяем, что позиция валидна
+		if is_position_valid(random_position):
+			return random_position
+	print(\"Не удалось найти уникальную позицию!\")
+	return Vector2(0, 0)  # Центр игрового поля по умолчанию
+ 
+
+
+func is_position_valid(new_position: Vector2) -> bool:
+	# Проверяем наложение и границы
+	if not game_area.has_point(new_position):
+		return false  # Позиция вне игрового поля
+	for existing_position in jar_positions:
+		if new_position.distance_to(existing_position) < min_distance:
+			return false  # Слишком близко к другим банкам
+	return true  # Позиция валидна
+	
+func _draw():
+	draw_rect(game_area, Color(1, 0, 0, 0.5), false)  # Рисуем красный прямоугольник
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8mm7a"]
@@ -3712,9 +3712,10 @@ tile_map_data = PackedByteArray("AAD0//b/AAAGAHMAAAD0//f/AAAGAHQAAAD0//j/AAAGAHU
 tile_set = SubResource("TileSet_qwutr")
 
 [node name="Camera of Player View" type="Camera2D" parent="."]
-zoom = Vector2(3, 3)
+zoom = Vector2(0.5, 0.5)
 
 [node name="BankScene" type="Node2D" parent="."]
+visible = false
 script = ExtResource("4_8mm7a")
 
 [node name="Sprite2D" type="Sprite2D" parent="BankScene"]
@@ -3733,6 +3734,7 @@ libraries = {
 }
 
 [node name="PlayerScene" type="Node2D" parent="."]
+position = Vector2(20, -20)
 
 [node name="Sprite2D" type="Sprite2D" parent="PlayerScene"]
 
