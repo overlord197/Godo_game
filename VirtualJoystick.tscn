@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://4ohkpqnlysas"]
+
+[ext_resource type="Script" uid="uid://bx0n4d0iiwoxd" path="res://virtual_joystick.gd" id="1_ekvhk"]
+[ext_resource type="Texture2D" uid="uid://bmwhbf4ko7xfo" path="res://Assets/joystick texture`s/minimap_ring_brown_detail.png" id="2_q0k4a"]
+[ext_resource type="Texture2D" uid="uid://b2rrcos4v655o" path="res://Assets/joystick texture`s/round_grey.png" id="3_l8p10"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchor_right = 0.228
+anchor_bottom = 0.197
+offset_right = 263.344
+offset_bottom = 127.344
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_ekvhk")
+
+[node name="BG" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+pivot_offset = Vector2(64, 64)
+texture = ExtResource("2_q0k4a")
+
+[node name="Circle" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 96.0
+offset_bottom = 96.0
+pivot_offset = Vector2(32, 32)
+texture = ExtResource("3_l8p10")

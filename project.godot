@@ -13,15 +13,15 @@ config_version=5
 config/name="game_farming"
 run/main_scene="uid://bvf5t4bu4uym4"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://Assets/icon.svg"
-
-[autoload]
-
-Global="*res://tscn/Global.gd"
+config/icon="res://icon.svg"
 
 [dotnet]
 
 project/assembly_name="game_farming"
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
 
 [rendering]
 
