@@ -51,31 +51,27 @@ func _ready():
 		tree_instance.get_node(\"Sprite2D\").texture = random_texture
 		
 		# Настраиваем CollisionShape2D в зависимости от текстуры
-		var collision_polygon = tree_instance.get_node(\"CollisionPolygon2D\")
-		collision_polygon.polygon = []  # Убираем старую форму
+		var collision_shape = tree_instance.get_node(\"CollisionShape2D\")
+		collision_shape.shape = null  # Убираем старую форму
 		
 		if random_texture == preload(\"res://Assets/1-tree.png\"):
-			collision_polygon.polygon = [
-				Vector2(16, 0), Vector2(16, 11), Vector2(0, 18), Vector2(-16, 11), Vector2(-16, 0)
-			]  # Произвольная форма
-			
+			var new_shape = CircleShape2D.new()
+			new_shape.radius = 50  # Радиус для этой текстуры
+			collision_shape.shape = new_shape
 		elif random_texture == preload(\"res://Assets/2-tree.png\"):
-			collision_polygon.polygon = [
-				Vector2(16, 0), Vector2(16, 11), Vector2(0, 18), Vector2(-16, 11), Vector2(-16, 0)
-			]  # Произвольная форма
-			collision_polygon.position = Vector2(0, 16)  # Смещение позиции
-			
+			var new_shape = RectangleShape2D.new()
+			new_shape.extents = Vector2(30, 80)  # Размеры для этой текстуры
+			collision_shape.shape = new_shape
 		elif random_texture == preload(\"res://Assets/3-tree.png\"):
-			collision_polygon.polygon = [
-				Vector2(16, 0), Vector2(16, 11), Vector2(0, 18), Vector2(-16, 11), Vector2(-16, 0)
-			]  # Произвольная форма
-			collision_polygon.position = Vector2(0, 7)  # Смещение позиции
-			
+			var new_shape = RectangleShape2D.new()
+			new_shape.extents = Vector2(60, 60)  # Другие размеры
+			collision_shape.shape = new_shape
 		elif random_texture == preload(\"res://Assets/4-tree.png\"):
-			collision_polygon.polygon = [
-				Vector2(16, 0), Vector2(16, 11), Vector2(0, 18), Vector2(-16, 11), Vector2(-16, 0)
-			]  # Произвольная форма
-			collision_polygon.position = Vector2(0, 11)  # Смещение позиции
+			var new_shape = ConvexPolygonShape2D.new()
+			new_shape.points = [
+				Vector2(-40, 0), Vector2(40, 0), Vector2(0, -70)
+			]  # Пример произвольной формы
+			collision_shape.shape = new_shape
 		
 		# Устанавливаем уникальную позицию для дерева
 		var new_position = generate_unique_position_for_tree()
@@ -1639,7 +1635,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hq1ik"]
-size = Vector2(14, 31)
+size = Vector2(14, 32)
 
 [sub_resource type="LabelSettings" id="LabelSettings_qwutr"]
 
@@ -1665,10 +1661,10 @@ metadata/_edit_lock_ = true
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_meb7l")
-animation = &"Left"
+animation = &"Bottom"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-position = Vector2(0, 2.5)
+position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_hq1ik")
 
 [node name="Camera_Player_View" type="Camera2D" parent="CharacterBody2D"]
