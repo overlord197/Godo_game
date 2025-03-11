@@ -13,7 +13,11 @@ config_version=5
 config/name="game_farming"
 run/main_scene="uid://bvf5t4bu4uym4"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://Assets/icon.svg"
+
+[autoload]
+
+Global="*res://tscn/Global.gd"
 
 [dotnet]
 
@@ -22,3 +26,4 @@ project/assembly_name="game_farming"
 [rendering]
 
 renderer/rendering_method="mobile"
+textures/vram_compression/import_etc2_astc=true
