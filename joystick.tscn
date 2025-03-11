@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://dun0xsmxyb3pj"]
+
+[ext_resource type="Script" uid="uid://b7enfjmbpp0m" path="res://node_2d.gd" id="1_jhikm"]
+[ext_resource type="Texture2D" uid="uid://bmwhbf4ko7xfo" path="res://Assets/joystick texture`s/minimap_ring_brown_detail.png" id="2_e821k"]
+[ext_resource type="Texture2D" uid="uid://b2rrcos4v655o" path="res://Assets/joystick texture`s/round_grey.png" id="3_dbkwe"]
+[ext_resource type="Script" uid="uid://dsm6t074wqne2" path="res://knob.gd" id="4_ha458"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_jhikm")
+
+[node name="Bg" type="TextureRect" parent="."]
+offset_right = 128.0
+offset_bottom = 128.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_e821k")
+
+[node name="Knob" type="TextureRect" parent="."]
+offset_right = 64.0
+offset_bottom = 64.0
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(32, 32)
+texture = ExtResource("3_dbkwe")
+script = ExtResource("4_ha458")
+
+[node name="Button" type="Button" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+offset_right = 64.0
+offset_bottom = 64.0
